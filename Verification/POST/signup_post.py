@@ -57,7 +57,8 @@ def signup():
 
         image_id = str(uuid.uuid4())
         image_name = f"{image_id}{file_extension}"
-        image_path = f"./images/user_image{image_name}"
+        image_path = f"./images/{image_name}"
+        image.save(image_path)
         json.dumps(str(image_name))
 
         imghdr_extension = imghdr.what(image_path)
