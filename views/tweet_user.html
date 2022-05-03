@@ -1,0 +1,74 @@
+% if not is_fetch:
+  % include("header")
+% end
+
+<main
+  data-spa_url="/tweet_user/{{user_id}}"
+  data-spa_title="{{title}}"
+>
+
+
+    % include("create-tweet")
+    % include("update-tweet")
+    % include("left")
+
+    
+        <div class="w-2/4 min-h-screen border-x border-gray-300">
+        <!-- CARD -->
+            <div id="user-tweet-post" class="voices mt-4 tweet-post">
+                % for tweet in user_tweets:
+                    <div id="{{tweet['tweet_id']}}" class="p-4 border-t border-slate-200">
+                        <div class="flex">
+                            % if "user_image" in tweet:
+                                <img class="flex-none w-12 h-12 object-cover rounded-full" 
+                                    src="/images/user_image/{{tweet['user_image']}}" 
+                                    onError="this.onerror=null;this.src='/images/barca.png';"
+                                >
+                            % end
+                            <div class="w-full pl-4">
+                            
+                                <!-- first name - username/ text -->
+                                <div id="user-info" class="flex">
+                                    <p class="font-bold pr-2">
+                                    {{tweet['user_first_name']}} {{tweet['user_last_name']}}
+                                    </p>
+                                    <p class="font-thin">
+                                    @{{tweet['user_name']}} - <span class="ml-1 text-xs font-light">{{tweet['tweet_created_at']}}</span>
+                                    </p>                        
+                                </div>
+                                
+                                <div id="tweet-text" class="pt-2">
+                                    {{tweet['tweet_text']}}
+                                </div>
+                                
+                                % if 'tweet_image' in tweet:
+                                    <div id="tweet-image">
+                                        <img onerror="this.style.display='none'" 
+                                            class="mt-2 w-full object-cover h-80 tweet-image" 
+                                            src="/images/{{tweet['tweet_image']}}">
+                                    </div> 
+                                % end
+                                
+                                <div class="flex gap-12 w-10 mt-4 text-lg">
+                                    <i onclick="openEditForm(`{{tweet['tweet_id']}}`)" id="edit-tweet" class="editBtn fa-solid fa-pen cursor-pointer"></i>
+                                    <i onclick="deleteTweet(`{{tweet['tweet_id']}}`)" class="fas fa-trash ml-auto cursor-pointer"></i>
+                                    <i class="fa-regular fa-comment ml-auto"></i>
+                                    <i class="fa-regular fa-heart"></i>
+                                    <i class="fa-solid fa-retweet"></i>
+                                    <i class="fa-solid fa-share-nodes"></i>
+                                </div>
+                            
+                            </div>
+                        </div>
+                    </div>
+                % end
+            </div>
+        </div>
+        
+        % include("right")
+    
+    </main>
+
+% if not is_fetch:
+  % include("footer")
+% end
