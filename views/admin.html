@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+        <link rel="stylesheet" href="../app.css">
+        <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+        <script src="https://kit.fontawesome.com/c884ab5724.js" crossorigin="anonymous"></script>
+        <script src="app.js"></script>
+        <title>Admin Page</title>
+    </head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fa fa-twitter fa-3x"></i>
+        </div>
+        <ul class="nav-links">
+            <div class="menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="/logout-admin">Logout</a></li>
+            </div>
+        </ul>
+    </nav>
+
+    <main>
+        <h1>Admin Page</h1>
+        <div id="table-container">
+            <table class="table">
+            
+                <thead>
+                <tr>
+                    <th scope="col">User name</th>
+                    <th scope="col">Tweet text</th>
+                    <th scope="col">Tweet ID</th>
+                </tr>
+                </thead>
+                
+                % for tweet in tweets:
+                <tbody id="{{tweet['tweet_id']}}">
+                    <tr>
+                        <form action="delete-user" method="POST">
+                            <input name="user_id" type="hidden">
+                            <td>@{{tweet['user_name']}}</td>
+                            <td style="width: 500px;">{{tweet['tweet_text']}}</td>
+                            <td>{{tweet['tweet_id']}}</td>
+                            <td><button onclick="deleteTweet(`{{tweet['tweet_id']}}`); return false" class="btn btn-sm btn-danger btn">delete</button></td>
+                        </form>
+                    </tr> 
+                </tbody>
+                % end
+            </table>
+            % if tweets==[]:
+                <div>
+                    no tweets yet
+                </div>
+             % end
+
+        </div>
+    </main>
+
+    
+</body>
+</html>

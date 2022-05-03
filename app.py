@@ -1,20 +1,14 @@
 
-from bottle import default_app, get, request, response, run, static_file, view
+from bottle import default_app, get, run, static_file
+
+
+
 import Verification.GET.signup
 import Verification.GET.login
+import ROUTES.index_get
+import ROUTES.admin
 import Verification.POST.signup_post
-
-
-@get("/")
-@view("index.html")
-def index():
-    try:
-        is_fetch = True if request.headers.get("From-Fetch") else False
-        return dict(title="My Twitter", is_fetch=is_fetch)
-    except Exception as ex:
-        print(ex)
-        response.staus = 500
-        return "Something is wrong!!"
+import Verification.POST.login_post
 
 #############################################
 @get("/app.css")
