@@ -14,6 +14,8 @@ def signup():
         email_already_exists = request.params.get("email_already_exists")
         user_password = request.params.get("user_password")
 
+       
+
         is_fetch = True if request.headers.get('From-Fetch') else False
         page_title = "signup"
         return dict(
@@ -29,6 +31,7 @@ def signup():
             user_password = user_password
             
             )
+     
 
     except Exception as ex:
         print(ex)

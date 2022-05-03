@@ -9,9 +9,9 @@ import imghdr
 @post("/signup")
 def signup():
     # REGEX VALIDATION
-    if not re.match(g.REGEX_USERNAME, request.forms.get("user_name")):
-        response.status = 400
-        return "Username must contain 5 to 20 characters or numbers and only '.', '-' and '_' characters are allowed "
+    # if not re.match(g.REGEX_USERNAME, request.forms.get("user_name")):
+    #     response.status = 400
+    #     return "Username must contain 5 to 20 characters or numbers and only '.', '-' and '_' characters are allowed "
 
     if not re.match(g.REGEX_EMAIL, request.forms.get("user_email")):
         response.status = 400
@@ -28,8 +28,8 @@ def signup():
     user_name = request.forms.get("user_name")
     user_password = request.forms.get("user_password")
 
-    for key in g.USERS:
-        if g.USERS[key]["user_email"] == request.forms.get("user_email"):
+    for id in g.USERS:
+        if g.USERS[id]["user_email"] == request.forms.get("user_email"):
             return redirect("/signup?error=email_exists&user_first_name={user_first_name}&user_last_name={user_last_name}&user_email={user_email}")
 
     
